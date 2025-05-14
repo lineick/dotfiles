@@ -1,6 +1,6 @@
 # Shell stuff
-alias la="ls -a"
-alias ll="ls -la"
+alias ll='ls -alF'
+alias la='ls -A'
 alias reload="exec $SHELL"
 alias ..="cd .."                      
 alias ...="cd ../.." 
