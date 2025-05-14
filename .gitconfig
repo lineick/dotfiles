@@ -1,0 +1,51 @@
+[user]
+	email = 75929322+lineick@users.noreply.github.com
+	signingkey = ~/.ssh/id_ed25519
+	name = lineick
+
+[commit]
+	gpgsign = true
+
+[init]
+	defaultBranch = main
+
+[rerere]
+  # Reuse recorded actions, auto-resolves conflicts if the exact same conflict arises again
+	enabled = true
+
+[gpg]
+	format = ssh
+
+[alias]
+	# Undo the last commit, keep the changes staged
+	uncommit = reset --soft HEAD^
+
+	# Unstage changes but keep the modifications in working directory
+	unstage = reset
+
+[color]
+	# Enable colored output in terminal (e.g., git status, git diff)
+	ui = true
+
+[core]
+	# On Mac/Linux: convert CRLF to LF on commit, leave LF on checkout
+	autocrlf = input
+
+	# Default editor for commit messages, rebases, etc.
+	editor = nvim
+
+[diff]
+	# Use helpful prefixes (a/ = ours, b/ = theirs) in diffs
+	mnemonicprefix = true
+
+	# Detect renamed files by copying them instead of delete+add
+  # Keeps file history intact
+	rename = copy
+
+[grep]
+	# Show line numbers in grep output (useful for searching code)
+	lineNumber = true
+
+[interactive]
+	# Allow single keystroke actions in interactive commands (like 'git add -p')
+  # singlekey = true
