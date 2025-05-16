@@ -1,4 +1,5 @@
 # Shell stuff
+alias mv='mv -i'
 alias ll='ls -alF'
 alias la='ls -A'
 alias reload="exec $SHELL"
