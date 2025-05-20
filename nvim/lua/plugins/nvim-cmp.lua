@@ -47,31 +47,30 @@ return { -- Autocompletion
         end,
       },
       completion = { completeopt = 'menu,menuone,noinsert' },
-
       -- For an understanding of why these mappings were
       -- chosen, you will need to read `:help ins-completion`
       --
       -- No, but seriously. Please read `:help ins-completion`, it is really good!
-      mapping = cmp.mapping.preset.insert {
-        -- Select the [n]ext item
-        ['<C-n>'] = cmp.mapping.select_next_item(),
-        -- Select the [p]revious item
-        ['<C-p>'] = cmp.mapping.select_prev_item(),
-
-        -- Accept ([y]es) the completion.
-        --  This will auto-import if your LSP supports it.
-        --  This will expand snippets if the LSP sent a snippet.
-        -- ['<Tab>'] = cmp.mapping.confirm { select = true },
+      mapping = cmp.mapping.preset.insert({
         ['<Tab>'] = cmp.mapping(function(fallback)
           if cmp.visible() then
-            cmp.confirm { select = true }
+            cmp.confirm({ select = true }) --accept currently selected item.
           elseif luasnip.expand_or_jumpable() then
             luasnip.expand_or_jump()
           else
             fallback()
           end
         end, { "i", "s" }),
+        -- Select the [n]ext item
+        -- ['<C-n>'] = cmp.mapping.select_next_item(),
+        -- Select the [p]revious item
+        -- ['<C-p>'] = cmp.mapping.select_prev_item(),
+        -- use arrow keys to navigate the completion
 
+        -- Accept ([y]es) the completion.
+        --  This will auto-import if your LSP supports it.
+        --  This will expand snippets if the LSP sent a snippet.
+        -- ['<Tab>'] = cmp.mapping.confirm { select = true },
         -- Manually trigger a completion from nvim-cmp.
         --  Generally you don't need this, because nvim-cmp will display
         --  completions whenever it has completion options available.
@@ -94,8 +93,6 @@ return { -- Autocompletion
             end
           end,
         }),
-
-
         -- Scroll the documentation window [b]ack / [f]orward
         -- ['<C-b>'] = cmp.mapping.scroll_docs(-4),
         -- ['<C-f>'] = cmp.mapping.scroll_docs(4),
@@ -127,6 +124,24 @@ return { -- Autocompletion
 
         -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
         --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
+      }),
+      sorting = {
+        priority_weight = 2,
+        comparators = {
+          -- require("copilot_cmp.comparators").prioritize,
+
+          -- Below is the default comparitor list and order for nvim-cmp
+          cmp.config.compare.offset,
+          -- cmp.config.compare.scopes, --this is commented in nvim-cmp too
+          cmp.config.compare.exact,
+          cmp.config.compare.score,
+          cmp.config.compare.recently_used,
+          cmp.config.compare.locality,
+          cmp.config.compare.kind,
+          cmp.config.compare.sort_text,
+          cmp.config.compare.length,
+          cmp.config.compare.order,
+        },
       },
       sources = {
         {
@@ -134,6 +149,7 @@ return { -- Autocompletion
           -- set group index to 0 to skip loading LuaLS completions as lazydev recommends it
           group_index = 0,
         },
+        -- { name = 'copilot', group_index=2},
         { name = 'nvim_lsp' },
         { name = 'luasnip' },
         { name = 'path' },
