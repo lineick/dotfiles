@@ -120,6 +120,9 @@ export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
+# Options for zsh
+setopt inc_append_history # Append history to the history file, so tmux panes can share history
+
 # Making the outputs of commands appear in the terminal rather than a new editor (e.g. git log)
 # export PAGER=cat
 
