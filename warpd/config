@@ -1,0 +1,36 @@
+drag_button: 1
+oneshot_buttons: m . ,
+
+left: s
+right: f
+up: e
+down: d
+
+
+cursor_color: #04f500
+cursor_size: 10
+
+screen: a
+screen_chars: fj
+
+grid: g
+grid_exit: c
+
+
+hint_size: 16
+hint_border_radius: 10
+
+hint2_chars: wersdfxcv  
+
+hist_back: u
+hist_forward: C-r
+
+copy_and_exit: y
+
+scroll_down: j
+scroll_up: k
+
+speed: 200
+decelerator: h
+accelerator: l
+accelerator_acceleration: 4000

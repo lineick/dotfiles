@@ -12,6 +12,8 @@ ln -s "$SCRIPT_DIR/.aliases" ~/.aliases
 mkdir -p ~/.config
 ln -s "$SCRIPT_DIR/nvim" ~/.config/nvim
 ln -s "$SCRIPT_DIR/kitty" ~/.config/kitty
+ln -s "$SCRIPT_DIR/warpd" ~/.config/warpd
+
 
 # Setting up plugins for tmux
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm || true
