@@ -6,7 +6,7 @@ require("luasnip.loaders.from_snipmate").load() -- moved from the bottom, make s
 vim.opt.number = true
 vim.opt.relativenumber = true
 
-vim.opt.clipboard = "unnamedplus"
+-- vim.opt.clipboard = "unnamedplus"
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 
