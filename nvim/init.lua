@@ -1,3 +1,5 @@
+vim.loader.enable()     -- native Lua module cache
+
 require("config")
 require("autoclose").setup()
 require("luasnip.loaders.from_snipmate").load() -- moved from the bottom, make sure still works
@@ -40,3 +42,6 @@ vim.opt.scroll = 15
 -- Allow search terms to stay in the middle
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
+
+-- Colorscheme
+vim.cmd.colorscheme "catppuccin"

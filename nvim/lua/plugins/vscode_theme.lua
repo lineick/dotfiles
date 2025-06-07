@@ -1,3 +1,4 @@
+-- if true then return {} end
 return {
     {
         'Mofiqul/vscode.nvim',
@@ -11,8 +12,6 @@ return {
 						-- },
 						transparent = true,
 					})
-
-					vim.cmd("colorscheme vscode")
         end,
     }
 }
