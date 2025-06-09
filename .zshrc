@@ -23,6 +23,10 @@ ZSH_THEME="af-magic"
 # Case-sensitive completion must be off. _ and - will be interchangeable.
 HYPHEN_INSENSITIVE="true"
 
+# rm safeguards
+unsetopt RM_STAR_SILENT # ask before removing files with wildcard
+setopt RM_STAR_WAIT # wait 10 seconds before removing files with wildcard
+
 # Uncomment one of the following lines to change the auto-update behavior
 # zstyle ':omz:update' mode disabled  # disable automatic updates
 # zstyle ':omz:update' mode auto      # update automatically without asking
