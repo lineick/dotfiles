@@ -49,3 +49,6 @@ vim.keymap.set("n", "Q", "", { noremap = true, desc = "Key not used" })
 
 -- remove select mode
 vim.keymap.set("n", "gh", "", { noremap = true, desc = "Key not used (no select mode)" })
+
+-- Git (fugitive)
+vim.keymap.set("n", "<leader>g", ":Git<CR>", { noremap = true, desc = "Open Git" })

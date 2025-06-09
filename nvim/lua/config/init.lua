@@ -15,4 +15,3 @@ require("config.comment")
 require("config.treesitter-context")
 require("config.dial")
 require("config.surround")
-
