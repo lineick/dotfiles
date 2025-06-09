@@ -4,7 +4,6 @@ return {
   -- tag = "v2.15", -- uncomment to pin to a specific release
   init = function()
     -- VimTeX configuration goes here, e.g.
-    vim.g.vimtex_view_method = "skim";
     vim.g.vimtex_quickfix_ignore_filters = {
       "Command terminated with space",
       "LaTeX Font Warning: Font shape",

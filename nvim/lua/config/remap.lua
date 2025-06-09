@@ -1,5 +1,5 @@
 vim.g.mapleader = " "
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex, { desc = "Open netrw" })
+vim.keymap.set("n", "<leader>pv", function() require("oil").open_float() end, { desc = "Open Oil file manager" })
 
 -- Window movement
 vim.keymap.set('n', '<leader>h', '<C-w>h', { noremap = true, desc = "Move to left window" })
@@ -43,3 +43,9 @@ vim.keymap.set("n", "=ap", "ma=ap'a")
 --diagnostics next
 vim.keymap.set("n", "<C-j>", vim.diagnostic.goto_next)
 vim.keymap.set("n", "<C-k>", vim.diagnostic.goto_prev)
+
+-- FREE KEYS
+vim.keymap.set("n", "Q", "", { noremap = true, desc = "Key not used" })
+
+-- remove select mode
+vim.keymap.set("n", "gh", "", { noremap = true, desc = "Key not used (no select mode)" })

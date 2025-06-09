@@ -18,9 +18,29 @@ dap.configurations.python = {
       if venv_path then
         return venv_path .. '/bin/python'
       end
-      return '/Users/jarl/.pyenv/shims/python'
+      return '/home/linus/.pyenv/shims/python'
 
     end;
+  },
+  {
+    type = 'python',
+    request = 'launch',
+    name = 'Run custom script',
+    program = function()
+      return vim.fn.input('Python file: ', vim.fn.getcwd() .. '/', 'file')
+    end,
+    args = function()
+      local input = vim.fn.input('Arguments: ')
+      return vim.fn.split(input, ' ', true)
+    end,
+    console = 'integratedTerminal',
+    pythonPath = function()
+      local venv_path = os.getenv("VIRTUAL_ENV")
+      if venv_path then
+        return venv_path .. '/bin/python'
+      end
+      return '/home/linus/.pyenv/shims/python'
+    end,
   },
 }
 
@@ -29,7 +49,7 @@ dap.adapters.lldb = {
     type = "server",
     port = "${port}", -- DAP will automatically choose a free port
     executable = {
-        command = "/Users/jarl/codelldb/extension/adapter/codelldb",
+        command = "home/linus/codelldb/extension/adapter/codelldb",
         args = { "--port", "${port}" },
     },
 }
@@ -52,19 +72,19 @@ vim.g.dap_debug_log = true
 
 vim.fn.sign_define('DapBreakpoint', { text='◆', texthl='', linehl='', numhl='' })
 
-vim.api.nvim_set_keymap('n', '<F5>', "<Cmd>lua require'dap'.continue()<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<F10>', "<Cmd>lua require'dap'.step_over()<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<F11>', "<Cmd>lua require'dap'.step_into()<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<F12>', "<Cmd>lua require'dap'.step_out()<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<Leader>b', "<Cmd>lua require'dap'.toggle_breakpoint()<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>dc', "<Cmd>lua require'dap'.continue()<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>dn', "<Cmd>lua require'dap'.step_over()<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>di', "<Cmd>lua require'dap'.step_into()<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>do', "<Cmd>lua require'dap'.step_out()<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>db', "<Cmd>lua require'dap'.toggle_breakpoint()<CR>", { noremap = true, silent = true })
 -- vim.api.nvim_set_keymap('n', '<Leader>B', "<Cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>", { noremap = true, silent = true })
 -- vim.api.nvim_set_keymap('n', '<Leader>lp', "<Cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>", { noremap = true, silent = true })
 
 -- Open Read-Eval-Print Loop (essentially debug console)
-vim.api.nvim_set_keymap('n', '<Leader>dc', "<Cmd>lua require'dap'.repl.open()<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>dt', "<Cmd>lua require'dap'.repl.open()<CR>", { noremap = true, silent = true })
 
 -- Rerun session
-vim.api.nvim_set_keymap('n', '<Leader>rr', "<Cmd>lua require'dap'.run_last()<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>dr', "<Cmd>lua require'dap'.run_last()<CR>", { noremap = true, silent = true })
 
 -- Terminate session
 vim.keymap.set('n', '<Leader>dq', function()

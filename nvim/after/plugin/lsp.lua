@@ -27,8 +27,8 @@ local lsp_attach = function(client, bufnr)
   vim.keymap.set('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
   vim.keymap.set({ 'n', 'x' }, '<F3>', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', opts)
   vim.keymap.set('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
-  vim.keymap.set('n', '<leader>fl', '<cmd>lua vim.diagnostic.open_float()<cr>', opts)
-  vim.keymap.set('n', '<leader>dn', toggle_diagnostics, { desc = "Toggle diagnostics" })
+  vim.keymap.set('n', '<leader>dgk', '<cmd>lua vim.diagnostic.open_float()<cr>', opts)
+  vim.keymap.set('n', '<leader>dgt', toggle_diagnostics, { desc = "Toggle diagnostics" })
 end
 
 lsp_zero.extend_lspconfig({
@@ -44,6 +44,19 @@ require('mason-lspconfig').setup({
   handlers = {
     function(server_name)
       require('lspconfig')[server_name].setup({})
+    end,
+
+    lua_ls = function()
+      require('lspconfig').lua_ls.setup({
+        on_attach = lsp_attach,
+        settings = {
+          Lua = {
+            diagnostics = {
+              globals = { 'vim' }, -- tell Lua that 'vim' is a global variable
+            },
+          },
+        },
+      })
     end,
 
     pyright = function()
