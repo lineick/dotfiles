@@ -27,6 +27,9 @@ vim.opt.smarttab = true
 vim.opt.breakindent = true
 vim.opt.updatetime = 250
 
+-- for oil previews opening to the right instead of left
+vim.opt.splitright = true
+
 -- Making option + backspace work as "delete previuos word"
 vim.keymap.set('i', '<M-BS>', "<C-W>")
 
@@ -44,4 +47,4 @@ vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
 -- Colorscheme
-vim.cmd.colorscheme "catppuccin"
+vim.cmd.colorscheme "vscode"

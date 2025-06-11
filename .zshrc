@@ -25,7 +25,6 @@ HYPHEN_INSENSITIVE="true"
 
 # rm safeguards
 unsetopt RM_STAR_SILENT # ask before removing files with wildcard
-setopt RM_STAR_WAIT # wait 10 seconds before removing files with wildcard
 
 # Uncomment one of the following lines to change the auto-update behavior
 # zstyle ':omz:update' mode disabled  # disable automatic updates
