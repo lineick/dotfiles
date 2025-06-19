@@ -178,7 +178,7 @@ org.gnome.settings-daemon.plugins.media-keys	volume-up-precise-static	['<Shift>X
 org.gnome.settings-daemon.plugins.media-keys	volume-up-quiet	[]
 org.gnome.settings-daemon.plugins.media-keys	volume-up-quiet-static	['<Alt>XF86AudioRaiseVolume', '<Alt><Ctrl>XF86AudioRaiseVolume']
 org.gnome.settings-daemon.plugins.media-keys	volume-up-static	['XF86AudioRaiseVolume', '<Ctrl>XF86AudioRaiseVolume']
-org.gnome.settings-daemon.plugins.media-keys	www	['<Super>b']
+org.gnome.settings-daemon.plugins.media-keys	www	[]
 org.gnome.settings-daemon.plugins.media-keys	www-static	['XF86WWW']
 custom	'hints'	'hints'	'Menu'
 custom	'hints (scroll)'	'hints -m scroll'	'<Control>Menu'
@@ -186,3 +186,5 @@ custom	'warpd hint2 left'	'warpd --hint2 --click 1'	'Launch5'
 custom	'warpd hint2 right'	'warpd --hint2 --click 3'	'<Shift>Launch5'
 custom	'warpd screen selection'	'warpd --screen --oneshot'	'<Control>Launch5'
 custom	'warpd drag'	'zsh -c \"warpd --hint2 --oneshot && warpd --drag --normal --oneshot\"'	'Launch7'
+custom	'firefox private profile'	'bash -c \"set-default-firefox default-release && firefox -P default-release\"'	'<Super>b'
+custom	'firefox work profile'	'bash -c \"set-default-firefox work && firefox -P work\"'	'<Shift><Super>b'

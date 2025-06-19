@@ -42,6 +42,35 @@ dap.configurations.python = {
       return '/home/linus/.pyenv/shims/python'
     end,
   },
+  {
+  type    = 'python',
+  request = 'launch',
+  name    = 'Run arbitrary command',
+
+  --------------------------------------------------------------------------------
+  -- Ask once for a full command line.
+  --------------------------------------------------------------------------------
+  program = function()
+    local cmdline = vim.fn.input(
+      'python <script & args>: ',
+      vim.fn.getcwd() .. '/',
+      'file'
+    )
+    last_cmd      = utils.string_to_args(cmdline)
+    return table.remove(last_cmd, 1)          -- ← script-path (argv[0])
+  end,
+
+  args = function()
+    return last_cmd                           -- ← all remaining words
+  end,
+
+  console = 'integratedTerminal',
+
+  pythonPath = function()
+    return (os.getenv('VIRTUAL_ENV') or '/home/linus/.pyenv/shims')
+           .. '/bin/python'
+  end,
+  },
 }
 
 -- Adapter for Rust

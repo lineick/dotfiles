@@ -16,6 +16,9 @@ ln -s "$SCRIPT_DIR/kitty" ~/.config/kitty
 ln -s "$SCRIPT_DIR/warpd" ~/.config/warpd
 ln -s "$SCRIPT_DIR/hints" ~/.config/hints
 
+# custom scripts
+mkdir -p ~/.local/bin
+ln -s "$SCRIPT_DIR/set-default-firefox" ~/.local/bin/set-default-firefox
 
 # Setting up plugins for tmux
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm || true
