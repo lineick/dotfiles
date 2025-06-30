@@ -1,9 +1,5 @@
 vim.loader.enable()     -- native Lua module cache
 
--- disable netrw at the very start of your init.lua
--- vim.g.loaded_netrw = 1
--- vim.g.loaded_netrwPlugin = 1
-
 -- optionally enable 24-bit colour
 vim.opt.termguicolors = true
 
@@ -26,6 +22,20 @@ vim.opt.smarttab = true
 
 vim.opt.breakindent = true
 vim.opt.updatetime = 250
+
+-- yank via OSC52 (so + register works on remote machines)
+-- requires osc52 support in the terminal (works for kitty)
+vim.g.clipboard = {
+  name = 'OSC 52',
+  copy = {
+    ['+'] = require('vim.ui.clipboard.osc52').copy('+'),
+    ['*'] = require('vim.ui.clipboard.osc52').copy('*'),
+  },
+  paste = {
+    ['+'] = require('vim.ui.clipboard.osc52').paste('+'),
+    ['*'] = require('vim.ui.clipboard.osc52').paste('*'),
+  },
+}
 
 -- for oil previews opening to the right instead of left
 vim.opt.splitright = true
