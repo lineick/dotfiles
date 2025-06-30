@@ -44,6 +44,16 @@ vim.keymap.set("n", "=ap", "ma=ap'a")
 vim.keymap.set("n", "<C-j>", vim.diagnostic.goto_next)
 vim.keymap.set("n", "<C-k>", vim.diagnostic.goto_prev)
 
+-- jump function wise (remap top scope keys to current scope)
+vim.api.nvim_create_autocmd("FileType", {
+  callback = function()
+    vim.keymap.set({"n", "x", "o"}, "[[", "[m", { buffer = true, remap = true, desc = "Jump to start of previous function" })
+    vim.keymap.set({"n", "x", "o"}, "]]", "]m", { buffer = true, remap = true, desc = "Jump to start of next function" })
+    vim.keymap.set({"n", "x", "o"}, "[]", "[M", { buffer = true, remap = true, desc = "Jump to end of previous function" })
+    vim.keymap.set({"n", "x", "o"}, "][", "]M", { buffer = true, remap = true, desc = "Jump to end of next function" })
+  end,
+})
+
 -- FREE KEYS
 vim.keymap.set("n", "Q", "", { noremap = true, desc = "Key not used" })
 

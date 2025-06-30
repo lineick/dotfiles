@@ -13,7 +13,7 @@ conform.setup({
   }
 })
 
-vim.keymap.set("n", "<leader>fmt", function()
+vim.keymap.set({"n", "x"}, "<leader>fmt", function()
   conform.format({
     lsp_fallback = true,
     async = false,
