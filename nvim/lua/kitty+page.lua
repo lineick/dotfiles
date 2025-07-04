@@ -22,6 +22,34 @@ return function(INPUT_LINE_NUMBER, CURSOR_LINE, CURSOR_COLUMN)
 	vim.keymap.set("n", "n", "nzzzv")
 	vim.keymap.set("n", "N", "Nzzzv")
 	local term_buf = vim.api.nvim_create_buf(true, false)
+
+  -- copy command with yy
+  local function yank_command_only()
+    local current_line = vim.api.nvim_get_current_line()
+
+    -- 1. Strip the prompt: everything up to (and including) the first
+    --    “$” or “»”, plus the single space that follows.
+    current_line = current_line:gsub("^.-[%$»]%s+", "")
+
+    -- 2. Strip the suffix: anything that’s separated from the command
+    --    by two or more consecutive whitespace characters.
+    current_line = current_line:gsub("%s%s+.*$", "")
+
+    vim.fn.setreg("+", current_line)
+    vim.highlight.on_yank()
+
+    -- close the terminal buffer
+    vim.schedule(function ()
+      vim.cmd("quit")
+    end)
+  end
+
+  vim.api.nvim_buf_set_keymap(term_buf, 'n', 'yy', '', {
+    noremap = true,
+    callback = yank_command_only,
+    desc = 'Yank only the command without shell prompt symbols',
+  })
+
 	local term_io = vim.api.nvim_open_term(term_buf, {})
 	vim.api.nvim_buf_set_keymap(term_buf, "n", "q", "<Cmd>q<CR>", {})
 	local group = vim.api.nvim_create_augroup("kitty+page", {})
