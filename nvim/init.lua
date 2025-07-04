@@ -1,12 +1,17 @@
 vim.loader.enable()     -- native Lua module cache
 
+-- set ssh flag to adjust config
+vim.g.is_ssh = require("util.env").in_ssh()
+
 -- optionally enable 24-bit colour
 vim.opt.termguicolors = true
 
 -- empty setup using defaults
 require("config")
 require("autoclose").setup()
-require("luasnip.loaders.from_snipmate").load() -- moved from the bottom, make sure still works
+if not vim.g.is_ssh then
+  require("luasnip.loaders.from_snipmate").load() -- moved from the bottom, make sure still works
+end
 
 -- basic stuff
 vim.opt.number = true
@@ -36,9 +41,6 @@ vim.g.clipboard = {
     ['*'] = require('vim.ui.clipboard.osc52').paste('*'),
   },
 }
-
--- set ssh flag to adjust config
-vim.g.is_ssh = require("util.env").in_ssh()
 
 -- for oil previews opening to the right instead of left
 vim.opt.splitright = true
