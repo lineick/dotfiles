@@ -37,6 +37,9 @@ vim.g.clipboard = {
   },
 }
 
+-- set ssh flag to adjust config
+vim.g.is_ssh = require("util.env").in_ssh()
+
 -- for oil previews opening to the right instead of left
 vim.opt.splitright = true
 

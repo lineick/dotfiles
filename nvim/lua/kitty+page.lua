@@ -50,6 +50,14 @@ return function(INPUT_LINE_NUMBER, CURSOR_LINE, CURSOR_COLUMN)
     desc = 'Yank only the command without shell prompt symbols',
   })
 
+  vim.api.nvim_buf_set_keymap(term_buf, 'n', 'q', '', {
+    noremap   = true,
+    callback  = function()
+      vim.schedule(function() vim.cmd('quit') end)
+    end,
+    desc      = 'Close this scratch buffer',
+  })
+
 	local term_io = vim.api.nvim_open_term(term_buf, {})
 	vim.api.nvim_buf_set_keymap(term_buf, "n", "q", "<Cmd>q<CR>", {})
 	local group = vim.api.nvim_create_augroup("kitty+page", {})

@@ -1,3 +1,4 @@
+if vim.g.is_ssh then return {} end
 return {
   "lervag/vimtex",
   lazy = false, -- we don't want to lazy load VimTeX
