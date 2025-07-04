@@ -1,17 +1,16 @@
-local is_ssh = vim.g.is_ssh   -- shorter alias
+local is_ssh = vim.g.is_ssh
 
 return {
   'hrsh7th/nvim-cmp',
   event = 'InsertEnter',
 
-  -- ───── dependencies ─────────────────────────────────────────
   dependencies = (function()
     local deps = {
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-path',
     }
 
-    if not is_ssh then        -- only on local host
+    if not is_ssh then
       table.insert(deps, 'saadparwaiz1/cmp_luasnip')
 
       table.insert(deps, {
@@ -22,7 +21,6 @@ return {
           end
           return 'make install_jsregexp'
         end)(),
-        -- Optionally pull in pre-made snippets here …
         -- dependencies = { 'rafamadriz/friendly-snippets' },
       })
     end
