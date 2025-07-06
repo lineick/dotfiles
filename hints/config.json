@@ -12,7 +12,7 @@
     "hint_pressed_font_g": 0.5,
     "hint_pressed_font_b": 0.2,
     "hint_pressed_font_a": 1,
-    "hint_upercase": true,
+    "hint_uppercase": true,
     "hint_background_r": 1,
     "hint_background_g": 1,
     "hint_background_b": 0.5,

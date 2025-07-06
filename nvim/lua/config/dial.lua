@@ -1,3 +1,4 @@
+-- if true then return end
 local augend = require("dial.augend")
 
 require("dial.config").augends:register_group {
