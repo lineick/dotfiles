@@ -1,7 +1,7 @@
 {
 	"name": "Vimium C",
-	"@time": "06/07/2025, 12:16:21 pm",
-	"time": 1751796981468,
+	"@time": "06/07/2025, 1:51:09 pm",
+	"time": 1751802669075,
 	"environment": {
 		"extension": "2.12.3",
 		"platform": "linux",
@@ -17,7 +17,6 @@
 		""
 	],
 	"keyupTime": 90,
-	"scrollStepSize": 110,
 	"searchEngines": [
 		"bi: https://cn.bing.com/search?q=$s",
 		"g|go|gg|google|Google: https://www.google.com/search?q=%s \\",
