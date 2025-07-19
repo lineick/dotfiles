@@ -1,4 +1,4 @@
-vim.loader.enable()     -- native Lua module cache
+vim.loader.enable() -- native Lua module cache
 
 -- set ssh flag to adjust config
 vim.g.is_ssh = require("util.env").in_ssh()
@@ -44,9 +44,6 @@ vim.g.clipboard = {
 
 -- for oil previews opening to the right instead of left
 vim.opt.splitright = true
-
--- Making option + backspace work as "delete previuos word"
-vim.keymap.set('i', '<M-BS>', "<C-W>")
 
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = 'split'
