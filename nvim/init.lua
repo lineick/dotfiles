@@ -1,3 +1,4 @@
+vim.cmd('clearjumps') -- clear jumps on startup
 vim.loader.enable() -- native Lua module cache
 
 -- set ssh flag to adjust config
