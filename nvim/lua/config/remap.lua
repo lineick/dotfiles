@@ -1,5 +1,14 @@
 vim.g.mapleader = " "
-vim.keymap.set("n", "<leader>pv", function() require("oil").open_float() end, { desc = "Open Oil file manager" })
+-- open oil file manager at current directory
+-- vim.keymap.set("n", "<leader>pv", function() require("oil").open_float() end, { desc = "Open Oil file manager" })
+-- open oil in the same buffer so jumplist connects!
+vim.keymap.set("n", "<leader>pv", function()
+  if vim.bo.filetype == 'oil' then
+    require("oil.actions").close.callback()
+  else
+    vim.cmd('Oil')
+  end
+end)
 
 -- Window movement
 vim.keymap.set('n', '<leader>h', '<C-w>h', { noremap = true, desc = "Move to left window" })
