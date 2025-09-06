@@ -15,8 +15,11 @@ screen_chars: fj
 grid: g
 grid_exit: c
 
-hint_size: 16
-hint_border_radius: 10
+hint_size: 20
+hint_border_radius: 12
+hint2_size: 18
+hint2_gap_size: 4
+hint2_border_radius: 14
 
 hint2_chars: wersdfxcv  
 

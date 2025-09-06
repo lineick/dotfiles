@@ -1,1 +1,1 @@
-return { "haken.nvim", dev = true }
+return { "lineick/haken.nvim" }
