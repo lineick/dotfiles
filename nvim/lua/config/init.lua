@@ -17,3 +17,6 @@ require("config.dial")
 require("config.surround")
 require("config.cellular-automaton")
 require("config.haken") -- the best plugin ;)
+require("config.magma").setup()
+require("config.todo-comments")
+
