@@ -5,7 +5,7 @@ return {
   config = function()
     require("copilot").setup({
       suggestion = {
-        enabled = true,
+        enabled = false, -- activate again when subscription exist
         auto_trigger = true,
         keymap = {
           accept = "<Right>",

@@ -12,6 +12,7 @@ require("config")
 require("autoclose").setup()
 if not vim.g.is_ssh then
   require("luasnip.loaders.from_snipmate").load() -- moved from the bottom, make sure still works
+  vim.g.python3_host_prog = "/usr/bin/python" -- path to python runtime (currently 3.12.3)
 end
 
 -- basic stuff
