@@ -2,6 +2,9 @@
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
+#! WARNING: uncommenting will overwrite your shortcuts.csv
+# perl manage_shortcuts.pl -i shortcuts.csv
+
 ln -s "$SCRIPT_DIR/.tmux.conf" ~/.tmux.conf
 ln -s "$SCRIPT_DIR/.gitconfig" ~/.gitconfig
 ln -s "$SCRIPT_DIR/.aliases" ~/.aliases
