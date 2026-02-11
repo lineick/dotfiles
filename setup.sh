@@ -18,7 +18,8 @@ if [ -z "$SSH_CONNECTION" ]; then
     # custom scripts
     mkdir -p ~/.local/bin
     ln -s "$SCRIPT_DIR/set-default-firefox" ~/.local/bin/set-default-firefox
-
+    ln -s "$SCRIPT_DIR/latex-screenshot/latex-screenshot" ~/.local/bin/latex-screenshot
+    ln -s "$SCRIPT_DIR/latex-screenshot/latexocrd.py" ~/.local/bin/latexocrd.py
     # Zsh plugins
     git clone https://github.com/zsh-users/zsh-autosuggestions \
       "$ZSH_CUSTOM/plugins/zsh-autosuggestions" || true

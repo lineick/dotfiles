@@ -49,3 +49,5 @@
 [interactive]
 	# Allow single keystroke actions in interactive commands (like 'git add -p')
   # singlekey = true
+[credential]
+	helper = cache

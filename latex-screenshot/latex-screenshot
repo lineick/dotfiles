@@ -1,0 +1,42 @@
+#!/bin/bash
+
+# --- CONFIGURATION ---
+# Path to the specific Python inside pipx (Ensure this path exists!)
+DAEMON_PYTHON="$HOME/.local/share/pipx/venvs/pix2tex/bin/python"
+DAEMON_SCRIPT="$HOME/.local/bin/latexocrd.py"
+PIPE_PATH="/tmp/latex_ocr_pipe"
+TMP_IMG="/tmp/latex_ocr_snip.png"
+
+# --- EXECUTION ---
+
+# 1. Take Screenshot (Fast, X11)
+maim -s -u -b 3 -c 0.3,0.3,0.3,0.5 "$TMP_IMG"
+
+# If user cancelled (no file), exit
+if [ ! -f "$TMP_IMG" ]; then
+    exit 0
+fi
+
+# 2. Ensure Daemon is Running
+if ! pgrep -f "latexocrd.py" > /dev/null; then
+    # Start it in background
+    notify-send "LaTeX OCR" "Starting engine... (First run is slow)" -t 1000
+    nohup "$DAEMON_PYTHON" "$DAEMON_SCRIPT" > /dev/null 2>&1 &
+    
+    # Wait for the pipe to appear (Max 10 seconds)
+    TIMEOUT=0
+    while [ ! -p "$PIPE_PATH" ]; do
+        sleep 0.5
+        ((TIMEOUT++))
+        if [ $TIMEOUT -ge 20 ]; then
+            notify-send "LaTeX OCR" "Error: Daemon failed to start." -u critical
+            exit 1
+        fi
+    done
+fi
+
+# 3. Send Job to Daemon
+# We just write the filename to the pipe. The python script picks it up instantly.
+echo "$TMP_IMG" > "$PIPE_PATH"
+
+exit 0

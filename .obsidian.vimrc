@@ -2,11 +2,16 @@
 " nmap j gj
 " nmap k gk
 
+set clipboard=
+
+" make sure the space key is unmapped so it can be used as a leader key
+" DOES NOT WORK, wasted 2 hours here, just control c for system clipboard
+" unmap <Space>
+"
+" vmap <Space>y <C-c>
+
 " Quickly remove search highlights
 nmap <F9> :nohl<CR>
-
-" Yank to system clipboard
-nmap <leader>y "+y
 
 " THIS PART IS CURRENTLY NOT WORKING
 " map old C-o functionality to
@@ -31,6 +36,7 @@ exmap surround_backticks surround ` `
 exmap surround_brackets surround ( )
 exmap surround_square_brackets surround [ ]
 exmap surround_curly_brackets surround { }
+exmap surround_dollar surround $ $
 
 " NOTE: must use 'map' and not 'nmap'
 map [[ :surround_wiki<CR>
@@ -46,4 +52,5 @@ map s[ :surround_square_brackets<CR>
 map s] :surround_square_brackets<CR>
 map s{ :surround_curly_brackets<CR>
 map s} :surround_curly_brackets<CR>
+map s$ :surround_dollar<CR>
 
