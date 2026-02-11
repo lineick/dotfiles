@@ -2,9 +2,9 @@
 
 # --- CONFIGURATION ---
 # Path to the specific Python inside pipx (Ensure this path exists!)
-DAEMON_PYTHON="$HOME/.local/share/pipx/venvs/pix2tex/bin/python"
+DAEMON_PYTHON="$HOME/.local/share/pipx/venvs/pix2text/bin/python"
 DAEMON_SCRIPT="$HOME/.local/bin/latexocrd.py"
-PIPE_PATH="/tmp/latex_ocr_pipe"
+PIPE_PATH="/tmp/pix2text_pipe"
 TMP_IMG="/tmp/latex_ocr_snip.png"
 
 # --- EXECUTION ---

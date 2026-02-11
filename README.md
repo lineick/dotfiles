@@ -17,7 +17,7 @@ This whole config makes you mouse-free.
 - ([hints](https://github.com/AlfredoSequeida/hints) is the content-gnostic version of `warpd`, however I do not use it as it is slow with an unbearable 1-2 seconds delay)
 
 ## More Custom QOL
-- With `<C>Print` I can select an area on my screen (i.e. a math formula) with left drag (use warpd for mouseless) after release the content will start a custom [LatexOCR](https://github.com/lukas-blecher/LaTeX-OCR/tree/main) daemon that copies the selected formula as latex math to the clipboard. Will build a better solution than LatexOCR at some point, just works for math formula currently. Often makes errors, but still very useful.
+- With `<C>Print` I can select an area on my screen (e.g. slides with math formulae) using left drag (use warpd for mouseless). After release the content is piped to a custom [pix2text](https://github.com/breezedeus/Pix2Text/tree/main) daemon that copies the text and formulae as markdown with latex math to the clipboard. Works for hand-written text and formulae as well as tables. I set changed the params aggressively for line by line text to reduce erroneous parajumbles.
 
 - To export your gnome shortcuts just run `perl manage_shortcuts.pl -e shortcuts.csv` (exports the shortcuts to a csv)
 - Then you can import them on new setups with `perl manage_shortcuts.pl -i shortcuts.csv`
