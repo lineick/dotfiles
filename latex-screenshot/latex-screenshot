@@ -12,6 +12,11 @@ TMP_IMG="/tmp/latex_ocr_snip.png"
 # 1. Take Screenshot (Fast, X11)
 maim -s -u -b 3 -c 0.3,0.3,0.3,0.5 "$TMP_IMG"
 
+if [ ! -s "$TMP_IMG" ]; then
+    rm -f "$TMP_IMG" # Clean up if empty
+    exit 0
+fi
+
 # If user cancelled (no file), exit
 if [ ! -f "$TMP_IMG" ]; then
     exit 0
@@ -20,7 +25,7 @@ fi
 # 2. Ensure Daemon is Running
 if ! pgrep -f "latexocrd.py" > /dev/null; then
     # Start it in background
-    notify-send "LaTeX OCR" "Starting engine... (First run is slow)" -t 1000
+    notify-send "LaTeX OCR" "Starting engine..." -t 1000 -h int:transient:1
     nohup "$DAEMON_PYTHON" "$DAEMON_SCRIPT" > /dev/null 2>&1 &
     
     # Wait for the pipe to appear (Max 10 seconds)
@@ -29,7 +34,7 @@ if ! pgrep -f "latexocrd.py" > /dev/null; then
         sleep 0.5
         ((TIMEOUT++))
         if [ $TIMEOUT -ge 20 ]; then
-            notify-send "LaTeX OCR" "Error: Daemon failed to start." -u critical
+            notify-send "LaTeX OCR" "Error: Daemon failed to start." -u critical -t 1000
             exit 1
         fi
     done
