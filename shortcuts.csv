@@ -50,7 +50,7 @@ org.gnome.desktop.wm.keybindings	raise	[]
 org.gnome.desktop.wm.keybindings	raise-or-lower	[]
 org.gnome.desktop.wm.keybindings	set-spew-mark	[]
 org.gnome.desktop.wm.keybindings	show-desktop	[]
-org.gnome.desktop.wm.keybindings	switch-applications	[]
+org.gnome.desktop.wm.keybindings	switch-applications	['<Super>Tab', '<Alt>Tab']
 org.gnome.desktop.wm.keybindings	switch-applications-backward	['<Shift><Super>Tab', '<Shift><Alt>Tab']
 org.gnome.desktop.wm.keybindings	switch-group	[]
 org.gnome.desktop.wm.keybindings	switch-group-backward	[]
@@ -75,7 +75,7 @@ org.gnome.desktop.wm.keybindings	switch-to-workspace-last	['<Super>End']
 org.gnome.desktop.wm.keybindings	switch-to-workspace-left	['<Control><Super>j']
 org.gnome.desktop.wm.keybindings	switch-to-workspace-right	['<Control><Super>k']
 org.gnome.desktop.wm.keybindings	switch-to-workspace-up	[]
-org.gnome.desktop.wm.keybindings	switch-windows	['<Super>Tab', '<Alt>Tab']
+org.gnome.desktop.wm.keybindings	switch-windows	[]
 org.gnome.desktop.wm.keybindings	switch-windows-backward	[]
 org.gnome.desktop.wm.keybindings	toggle-above	[]
 org.gnome.desktop.wm.keybindings	toggle-fullscreen	[]
@@ -184,7 +184,7 @@ custom	'hints'	'hints'	'Launch5'
 custom	'hints (scroll)'	'hints -m scroll'	'<Shift>Launch5'
 custom	'warpd hint2 left'	'warpd --hint2 --click 1'	'Menu'
 custom	'warpd hint2 right'	'warpd --hint2 --click 3'	'<Shift>Menu'
-custom	'warpd screen selection'	'warpd --screen --oneshot'	'<Control>Menu'
+custom	'warpd screen selection hint2'	'zsh -c \"warpd --screen --oneshot && warpd --hint2 --click 1\"'	'<Control>Menu'
 custom	'warpd drag'	'zsh -c \"warpd --hint2 --oneshot && warpd --drag --normal --oneshot\"'	'<Shift><Control>Menu'
 custom	'firefox private profile'	'bash -c \"set-default-firefox default-release && firefox -P default-release\"'	'<Super>b'
 custom	'firefox work profile'	'bash -c \"set-default-firefox work && firefox -P work\"'	'<Shift><Super>b'
