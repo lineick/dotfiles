@@ -1,8 +1,8 @@
 {
   "hints": {
-    "hint_height": 30,
-    "hint_width_padding": 10,
-    "hint_font_size": 15,
+    "hint_height": 35,
+    "hint_width_padding": 15,
+    "hint_font_size": 20,
     "hint_font_face": "Sans",
     "hint_font_r": 0,
     "hint_font_g": 0,

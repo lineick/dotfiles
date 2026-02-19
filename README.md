@@ -7,14 +7,14 @@ Assumes X11.
 ## NEVER EVER USE A MOUSE
 
 This whole config makes you mouse-free.
-- Warp for global content-agnostic selection
-- vimium-c for blazingly fast browser nav
-- kitty+tmux for mouseless terminal nav and editing.
+- [vimium-c](https://github.com/gdh1995/vimium-c) for blazingly fast browser nav (Use my [nonstop-vimium](https://github.com/lineick/nonstop-vimium-c) firefox plugin to keep vimium working in PDFs and new-tabs)
+- [hints](https://github.com/AlfredoSequeida/hints) is the content-gnostic version of `warpd`
+- [Warpd](https://github.com/rvaiya/warpd) for global content-agnostic selection
+- [kitty](https://github.com/kovidgoyal/kitty)+[tmux](https://github.com/tmux/tmux) for mouseless terminal nav and editing.
     - `<tmux-leader> [` for vim-like buffer selection (checkout [.tmux.conf](.tmux.conf), it is fully vimified)
     - `<S><C><Space>` for actually opening the kitty content in a custom vim instance (checkout [kitty+lua.lua](nvim/lua/kitty+page.lua))
         - contains custom stuff like `yy` to copy the command without the other shell symbols (regex assumes my zsh layout, you can edit the regex in [kitty+lua.lua](nvim/lua/kitty+page.lua))
 
-- ([hints](https://github.com/AlfredoSequeida/hints) is the content-gnostic version of `warpd`, however I do not use it as it is slow with an unbearable 1-2 seconds delay)
 
 ## More Custom QoL
 - With `<C>Print` I can select an area on my screen (e.g. slides with math formulae) using left drag (use warpd for mouseless). After release the content is piped to a custom [pix2text](https://github.com/breezedeus/Pix2Text/tree/main) daemon that copies the text and formulae as markdown with latex math to the clipboard. Works for hand-written text and formulae as well as tables. I set changed the params aggressively for line by line text to reduce erroneous parajumbles.
