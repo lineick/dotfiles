@@ -14,15 +14,15 @@ ln -s "$SCRIPT_DIR/nvim" ~/.config/nvim
 
 # Only run these if not in SSH session
 if [ -z "$SSH_CONNECTION" ]; then
-    ln -s "$SCRIPT_DIR/kitty" ~/.config/kitty
-    ln -s "$SCRIPT_DIR/warpd" ~/.config/warpd
-    ln -s "$SCRIPT_DIR/hints" ~/.config/hints
-
+    ln -s "$SCRIPT_DIR/kitty" ~/.config/kitty # terminal
+    ln -s "$SCRIPT_DIR/warpd" ~/.config/warpd # agnostic mouse sim
+    ln -s "$SCRIPT_DIR/hints" ~/.config/hints # vimium-like mouse sim
+    ln -s "$SCRIPT_DIR/sioyek" ~/.config/sioyek # keyboard-driven PDF viewer
     # custom scripts
     mkdir -p ~/.local/bin
-    ln -s "$SCRIPT_DIR/set-default-firefox" ~/.local/bin/set-default-firefox
-    ln -s "$SCRIPT_DIR/latex-screenshot/latex-screenshot" ~/.local/bin/latex-screenshot
-    ln -s "$SCRIPT_DIR/latex-screenshot/latexocrd.py" ~/.local/bin/latexocrd.py
+    ln -s "$SCRIPT_DIR/set-default-firefox" ~/.local/bin/set-default-firefox # firefox profile toggle
+    ln -s "$SCRIPT_DIR/latex-screenshot/latex-screenshot" ~/.local/bin/latex-screenshot # screeenshot to latex math
+    ln -s "$SCRIPT_DIR/latex-screenshot/latexocrd.py" ~/.local/bin/latexocrd.py # pix2text OCR daemon for latex-screenshot
     # Zsh plugins
     git clone https://github.com/zsh-users/zsh-autosuggestions \
       "$ZSH_CUSTOM/plugins/zsh-autosuggestions" || true

@@ -10,6 +10,7 @@ This whole config makes you mouse-free.
 - [vimium-c](https://github.com/gdh1995/vimium-c) for blazingly fast browser nav (Use my [nonstop-vimium](https://github.com/lineick/nonstop-vimium-c) firefox plugin to keep vimium working for PDFs and new-tabs)
 - [hints](https://github.com/AlfredoSequeida/hints) is the content-gnostic version of `warpd`
 - [Warpd](https://github.com/rvaiya/warpd) for global content-agnostic selection
+- [sioyek](https://github.com/ahrm/sioyek) for mouseless pdf navigation (use `yv` to select text, and `sg` to google the marked term, `sd` to define and `st` to translate it to german)
 - [kitty](https://github.com/kovidgoyal/kitty)+[tmux](https://github.com/tmux/tmux) for mouseless terminal nav and editing.
     - `<tmux-leader> [` for vim-like buffer selection (checkout [.tmux.conf](.tmux.conf), it is fully vimified)
     - `<S><C><Space>` for actually opening the kitty content in a custom vim instance (checkout [kitty+lua.lua](nvim/lua/kitty+page.lua))
