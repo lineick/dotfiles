@@ -32,6 +32,11 @@ if [ -z "$SSH_CONNECTION" ]; then
 
     git clone https://github.com/jeffreytse/zsh-vi-mode \
       "$ZSH_CUSTOM/plugins/zsh-vi-mode" || true
+    # symlink obsidian plugin configs (tell the plugins the path manually)
+    #? NOTE: for latex suite the path shall not be hidden
+    # ln -s "$SCRIPT_DIR/obsidian" <your-vault-path>/config
+
+
 fi
 
 # Tmux plugins always installed
