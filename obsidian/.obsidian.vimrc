@@ -6,9 +6,9 @@ set clipboard=
 
 " make sure the space key is unmapped so it can be used as a leader key
 " DOES NOT WORK, wasted 2 hours here, just control c for system clipboard
-" unmap <Space>
+" unmap <space>
 "
-" vmap <Space>y <C-c>
+" vmap <space>y <C-c>
 
 " Quickly remove search highlights
 nmap <F9> :nohl<CR>

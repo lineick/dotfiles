@@ -154,7 +154,7 @@
 	{trigger: "orr", replacement: "\\cup", options: "mA"},
 	{trigger: "inn", replacement: "\\in", options: "mA"},
 	{trigger: "notin", replacement: "\\not\\in", options: "mA"},
-    {trigger: "\\\\\\", replacement: "\\setminus", options: "mA"},
+    {trigger: "without", replacement: "\\setminus", options: "mA"}, // changed
     {trigger: "sub=", replacement: "\\subseteq", options: "mA"},
     {trigger: "sup=", replacement: "\\supseteq", options: "mA"},
 	{trigger: "eset", replacement: "\\emptyset", options: "mA"},
