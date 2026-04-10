@@ -18,6 +18,8 @@ if [ -z "$SSH_CONNECTION" ]; then
     ln -s "$SCRIPT_DIR/warpd" ~/.config/warpd # agnostic mouse sim
     ln -s "$SCRIPT_DIR/hints" ~/.config/hints # vimium-like mouse sim
     ln -s "$SCRIPT_DIR/sioyek" ~/.config/sioyek # keyboard-driven PDF viewer
+    mkdir -p ~/.config/lektra
+    ln -s "$SCRIPT_DIR/lektra/config.toml" ~/.config/lektra/config.toml # keyboard-driven PDF viewer (currently preferred over sioyek)
     # custom scripts
     mkdir -p ~/.local/bin
     ln -s "$SCRIPT_DIR/set-default-firefox" ~/.local/bin/set-default-firefox # firefox profile toggle
