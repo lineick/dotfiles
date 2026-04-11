@@ -14,6 +14,7 @@ ln -s "$SCRIPT_DIR/nvim" ~/.config/nvim
 
 # Only run these if not in SSH session
 if [ -z "$SSH_CONNECTION" ]; then
+    ln -s "$SCRIPT_DIR/onedriver" ~/.config/onedriver # connect onedrive as remote file system
     ln -s "$SCRIPT_DIR/kitty" ~/.config/kitty # terminal
     ln -s "$SCRIPT_DIR/warpd" ~/.config/warpd # agnostic mouse sim
     ln -s "$SCRIPT_DIR/hints" ~/.config/hints # vimium-like mouse sim
