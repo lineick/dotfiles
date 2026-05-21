@@ -9,6 +9,12 @@ ln -s "$SCRIPT_DIR/.tmux.conf" ~/.tmux.conf
 ln -s "$SCRIPT_DIR/.gitconfig" ~/.gitconfig
 ln -s "$SCRIPT_DIR/.aliases" ~/.aliases
 
+ln -s "$SCRIPT_DIR ~/.claude
+ln -s "$SCRIPT_DIR/.claude/settings.json" ~/.claude/settings.json
+ln -s "$SCRIPT_DIR/.claude/CLAUDE.md"     ~/.claude/CLAUDE.md
+ln -s "$SCRIPT_DIR/.claude/agents"        ~/.claude/agents
+ln -s "$SCRIPT_DIR/.claude/commands"      ~/.claude/commands
+
 mkdir -p ~/.config
 ln -s "$SCRIPT_DIR/nvim" ~/.config/nvim
 
