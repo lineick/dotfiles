@@ -47,5 +47,6 @@
   "skipAutoPermissionPrompt": true,
   "autoCompact": true,
   "checkpoints": true,
-  "showTips": true
+  "showTips": true,
+  "skipWorkflowUsageWarning": true
 }
