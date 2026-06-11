@@ -41,8 +41,9 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 vim.keymap.set("n", "J", "mzJ`z")
 
 -- keep cursor in the middle position when scrolling and searching
-vim.keymap.set("n", "<C-d>", "<C-d>zz")
-vim.keymap.set("n", "<C-u>", "<C-u>zz")
+-- scroll=0 restores half-page scrolling (a count before <C-d>/<C-u> sets 'scroll')
+vim.keymap.set("n", "<C-d>", "<Cmd>set scroll=0<CR><C-d>zz")
+vim.keymap.set("n", "<C-u>", "<Cmd>set scroll=0<CR><C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 

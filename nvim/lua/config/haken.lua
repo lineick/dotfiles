@@ -1,4 +1,4 @@
--- if true then return {} end
+if true then return {} end
 -- vim.o.jumpoptions = "stack"
 
 local haken = require("haken")

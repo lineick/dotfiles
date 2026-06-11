@@ -1,5 +1,11 @@
 local lsp_zero = require("lsp-zero")
 
+-- nvim 0.11 default gr* lsp maps make gr ambiguous (timeoutlen wait on every press)
+for _, lhs in ipairs({ "grr", "grn", "gra", "gri", "grt" }) do
+  pcall(vim.keymap.del, "n", lhs)
+end
+pcall(vim.keymap.del, "x", "gra")
+
 
 -- Functionality for toggling diagnostics (inline errors etc.)
 local diagnostics_active = true
