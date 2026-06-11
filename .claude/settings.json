@@ -18,6 +18,28 @@
     "defaultMode": "default"
   },
   "model": "claude-fable-5[1m]",
+  "hooks": {
+    "Notification": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/tmux-attention.sh"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/tmux-attention.sh"
+          }
+        ]
+      }
+    ]
+  },
   "effortLevel": "xhigh",
   "theme": "dark",
   "editorMode": "vim",
