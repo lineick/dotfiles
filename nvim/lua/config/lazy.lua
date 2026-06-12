@@ -32,6 +32,8 @@ require("lazy").setup({
   install = { colorscheme = { "habamax" } },
   -- automatically check for plugin updates
   checker = { enabled = true },
+  -- no installed plugin needs luarocks
+  rocks = { enabled = false },
   -- nvim plugin development (moved inside the main config table)
   dev = {
     path = "~/git/priv",

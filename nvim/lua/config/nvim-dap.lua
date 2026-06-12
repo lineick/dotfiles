@@ -78,7 +78,7 @@ dap.adapters.lldb = {
     type = "server",
     port = "${port}", -- DAP will automatically choose a free port
     executable = {
-        command = "home/linus/codelldb/extension/adapter/codelldb",
+        command = vim.fn.stdpath("data") .. "/mason/bin/codelldb",
         args = { "--port", "${port}" },
     },
 }

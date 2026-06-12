@@ -15,6 +15,11 @@ if not vim.g.is_ssh then
   vim.g.python3_host_prog = "/usr/bin/python" -- path to python runtime (currently 3.12.3)
 end
 
+-- compat: jupytext.nvim still uses health api removed in nvim 0.12
+vim.health.report_start = vim.health.start
+vim.health.report_ok = vim.health.ok
+vim.health.report_error = vim.health.error
+
 -- basic stuff
 vim.opt.number = true
 vim.opt.relativenumber = true
