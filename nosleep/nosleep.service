@@ -1,0 +1,9 @@
+[Unit]
+Description=Hold sleep inhibitor while nosleep toggle is on and on AC power
+
+[Service]
+ExecStart=%h/.local/bin/nosleep
+Restart=on-failure
+
+[Install]
+WantedBy=default.target

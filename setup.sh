@@ -33,6 +33,9 @@ if [ -z "$SSH_CONNECTION" ]; then
     ln -s "$SCRIPT_DIR/set-default-firefox" ~/.local/bin/set-default-firefox # firefox profile toggle
     ln -s "$SCRIPT_DIR/latex-screenshot/latex-screenshot" ~/.local/bin/latex-screenshot # screeenshot to latex math
     ln -s "$SCRIPT_DIR/latex-screenshot/latexocrd.py" ~/.local/bin/latexocrd.py # pix2text OCR daemon for latex-screenshot
+    # idle-suspend toggle for gpu jobs (optional, only for nvidia laptops)
+    # ln -s "$SCRIPT_DIR/nosleep/nosleep" ~/.local/bin/nosleep
+    # systemctl --user enable --now "$SCRIPT_DIR/nosleep/nosleep.service" || true
     # Zsh plugins
     git clone https://github.com/zsh-users/zsh-autosuggestions \
       "$ZSH_CUSTOM/plugins/zsh-autosuggestions" || true

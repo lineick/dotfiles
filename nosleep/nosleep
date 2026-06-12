@@ -1,0 +1,58 @@
+#!/bin/bash
+# keep a long gpu job running while the screen is locked: gnome auto-suspends
+# after 1h idle even on ac; while the toggle is on AND the laptop is on ac
+# power this holds a sleep inhibitor blocking that. on unplug (or toggle off)
+# normal suspend behavior returns. closing the lid still suspends regardless,
+# so keep the lid open while training.
+# usage: nosleep CMD...        toggle on while CMD runs, off when it exits
+#        nosleep on|off|status manual toggle
+# daemon mode (no args) is run by the nosleep systemd user service.
+
+FLAG="${XDG_RUNTIME_DIR:-/tmp}/nosleep"
+INTERVAL=${INTERVAL:-5}
+
+on_ac() { grep -qs '^1$' /sys/class/power_supply/*/online; }
+held() { systemd-inhibit --list 2>/dev/null | grep -q nosleep; }
+
+case "$1" in
+  on)
+    touch "$FLAG"
+    echo "nosleep on (held while on ac power)"
+    on_ac || echo "warning: currently on battery, not inhibiting until plugged in"
+    exit ;;
+  off)
+    rm -f "$FLAG"
+    echo "nosleep off"
+    exit ;;
+  status)
+    [ -e "$FLAG" ] && echo "toggle: on" || echo "toggle: off"
+    on_ac && echo "power: ac" || echo "power: battery"
+    held && echo "inhibitor: held" || echo "inhibitor: not held"
+    exit ;;
+  "") ;;
+  *)
+    on_ac || echo "nosleep: on battery, not inhibiting until plugged in" >&2
+    touch "$FLAG"
+    trap 'rm -f "$FLAG"' EXIT INT TERM
+    "$@"
+    exit ;;
+esac
+
+inhibit_pid=""
+trap '[ -n "$inhibit_pid" ] && kill "$inhibit_pid" 2>/dev/null' EXIT
+
+while true; do
+  if [ -e "$FLAG" ] && on_ac; then
+    if [ -z "$inhibit_pid" ] || ! kill -0 "$inhibit_pid" 2>/dev/null; then
+      systemd-inhibit --what=sleep --who=nosleep \
+        --why="nosleep toggle active" sleep infinity &
+      inhibit_pid=$!
+      echo "inhibiting sleep"
+    fi
+  elif [ -n "$inhibit_pid" ]; then
+    kill "$inhibit_pid" 2>/dev/null
+    inhibit_pid=""
+    echo "sleep allowed"
+  fi
+  sleep "$INTERVAL"
+done
