@@ -17,7 +17,7 @@
     ],
     "defaultMode": "default"
   },
-  "model": "claude-fable-5[1m]",
+  "model": "opus[1m]",
   "hooks": {
     "Notification": [
       {
@@ -41,12 +41,12 @@
     ]
   },
   "effortLevel": "xhigh",
+  "skipWorkflowUsageWarning": false,
   "theme": "dark",
   "editorMode": "vim",
   "agentPushNotifEnabled": false,
   "skipAutoPermissionPrompt": true,
   "autoCompact": true,
   "checkpoints": true,
-  "showTips": true,
-  "skipWorkflowUsageWarning": true
+  "showTips": true
 }

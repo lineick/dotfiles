@@ -1,59 +1,30 @@
-require 'nvim-treesitter.configs'.setup({
-  -- A list of parser names, or "all" (the five listed parsers should always be installed)
-  ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "python", "rust" },
-
-  -- Install parsers sysly (only applied to `ensure_installed`)
-  sync_install = false,
-
-  -- Automatically install missing parsers when entering buffer
-  -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
-  auto_install = true,
-
-  ---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
-  -- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
-
-  highlight = {
-    enable = true,
-
-    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-    -- Using this option may slow down your editor, and you may see some duplicate highlights.
-    -- Instead of true it can also be a list of languages
-    additional_vim_regex_highlighting = false,
-  },
-  textobjects = {
-    move = {
-      enable = true,
-      set_jumps = false,     -- you can change this if you want.
-      goto_next_start = {
-        --- ... other keymaps
-        ["]b"] = { query = "@code_cell.inner", desc = "next code block" },
-      },
-      goto_previous_start = {
-        --- ... other keymaps
-        ["[b"] = { query = "@code_cell.inner", desc = "previous code block" },
-      },
-    },
-    select = {
-      enable = true,
-      lookahead = true,     -- you can change this if you want
-      keymaps = {
-        --- ... other keymaps
-        ["ib"] = { query = "@code_cell.inner", desc = "in block" },
-        ["ab"] = { query = "@code_cell.outer", desc = "around block" },
-      },
-    },
-    swap = {   -- Swap only works with code blocks that are under the same
-      -- markdown header
-      enable = true,
-      swap_next = {
-        --- ... other keymap
-        ["<leader>sbl"] = "@code_cell.outer",
-      },
-      swap_previous = {
-        --- ... other keymap
-        ["<leader>sbh"] = "@code_cell.outer",
-      },
-    },
-  },
+require("nvim-treesitter-textobjects").setup({
+  select = { lookahead = true },
+  move = { set_jumps = false },
 })
+
+local select = require("nvim-treesitter-textobjects.select")
+local move = require("nvim-treesitter-textobjects.move")
+local swap = require("nvim-treesitter-textobjects.swap")
+
+-- code cells (see after/queries/markdown/textobjects.scm)
+vim.keymap.set({ "x", "o" }, "ib", function()
+  select.select_textobject("@code_cell.inner", "textobjects")
+end, { desc = "in block" })
+vim.keymap.set({ "x", "o" }, "ab", function()
+  select.select_textobject("@code_cell.outer", "textobjects")
+end, { desc = "around block" })
+
+vim.keymap.set({ "n", "x", "o" }, "]b", function()
+  move.goto_next_start("@code_cell.inner", "textobjects")
+end, { desc = "next code block" })
+vim.keymap.set({ "n", "x", "o" }, "[b", function()
+  move.goto_previous_start("@code_cell.inner", "textobjects")
+end, { desc = "previous code block" })
+
+vim.keymap.set("n", "<leader>sbl", function()
+  swap.swap_next("@code_cell.outer")
+end, { desc = "swap code block with next" })
+vim.keymap.set("n", "<leader>sbh", function()
+  swap.swap_previous("@code_cell.outer")
+end, { desc = "swap code block with previous" })
