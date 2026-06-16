@@ -37,6 +37,7 @@ if [ -z "$SSH_CONNECTION" ]; then
     # ln -s "$SCRIPT_DIR/nosleep/nosleep" ~/.local/bin/nosleep
     # systemctl --user enable --now "$SCRIPT_DIR/nosleep/nosleep.service" || true
     # Zsh plugins
+    ln -sfn "$SCRIPT_DIR/.zshrc" ~/.zshrc
     ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
     git clone https://github.com/zsh-users/zsh-autosuggestions \
       "$ZSH_CUSTOM/plugins/zsh-autosuggestions" || true

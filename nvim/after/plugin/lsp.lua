@@ -1,5 +1,3 @@
-local lsp_zero = require("lsp-zero")
-
 -- nvim 0.11 default gr* lsp maps make gr ambiguous (timeoutlen wait on every press)
 for _, lhs in ipairs({ "grr", "grn", "gra", "gri", "grt" }) do
   pcall(vim.keymap.del, "n", lhs)
@@ -37,76 +35,104 @@ local lsp_attach = function(client, bufnr)
   vim.keymap.set('n', '<leader>td', toggle_diagnostics, { desc = "Toggle diagnostics" })
 end
 
-lsp_zero.extend_lspconfig({
-  sign_text = true,
-  lsp_attach = lsp_attach,
+-- run lsp_attach keymaps on every client attach
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(args)
+    lsp_attach(vim.lsp.get_client_by_id(args.data.client_id), args.buf)
+  end,
 })
+
+-- diagnostic signs in the gutter
+if vim.o.signcolumn == 'auto' then
+  vim.o.signcolumn = 'yes'
+end
+vim.diagnostic.config({ signs = true })
 
 require('mason').setup({})
 require('mason-lspconfig').setup({
-  -- Replace the language servers listed here
-  -- with the ones you want to install
-  ensure_installed = { 'lua_ls', 'rust_analyzer', 'pyright', "texlab" },
+  ensure_installed = { 'lua_ls', 'rust_analyzer', 'pyright', 'texlab' },
+})
+
+-- completion capabilities for all servers (merge cmp onto nvim defaults)
+vim.lsp.config('*', {
+  capabilities = vim.tbl_deep_extend(
+    'force',
+    vim.lsp.protocol.make_client_capabilities(),
+    require('cmp_nvim_lsp').default_capabilities()
+  ),
+})
+
+-- mason-lspconfig v2 auto-enables installed servers; per-server overrides go
+-- through vim.lsp.config (the handlers table is no longer honored)
+
+vim.lsp.config('lua_ls', {
+  settings = {
+    Lua = {
+      diagnostics = {
+        globals = { 'vim' }, -- tell Lua that 'vim' is a global variable
+      },
+    },
+  },
+})
+
+vim.lsp.config('pyright', {
+  settings = {
+    python = {
+      analysis = {
+        typeCheckingMode = "standard",
+        autoSearchPaths = true,
+        diagnosticMode = "workspace",
+        useLibraryCodeForTypes = true,
+      },
+    },
+  },
   handlers = {
-    function(server_name)
-      require('lspconfig')[server_name].setup({})
+    -- pyright sends rename edits with annotationId but omits the
+    -- changeAnnotations map, tripping nvim 0.12's strict assert.
+    -- strip the ids before applying. https://github.com/neovim/neovim/issues/34731
+    [vim.lsp.protocol.Methods.textDocument_rename] = function(err, result, ctx)
+      if err then
+        vim.notify('pyright rename failed: ' .. err.message, vim.log.levels.ERROR)
+        return
+      end
+      if not result then
+        return
+      end
+      for _, change in ipairs(result.documentChanges or {}) do
+        for _, edit in ipairs(change.edits or {}) do
+          edit.annotationId = nil
+        end
+      end
+      local client = assert(vim.lsp.get_client_by_id(ctx.client_id))
+      vim.lsp.util.apply_workspace_edit(result, client.offset_encoding)
     end,
+  },
+})
 
-    lua_ls = function()
-      require('lspconfig').lua_ls.setup({
-        on_attach = lsp_attach,
-        settings = {
-          Lua = {
-            diagnostics = {
-              globals = { 'vim' }, -- tell Lua that 'vim' is a global variable
-            },
-          },
+vim.lsp.config('texlab', {
+  settings = {
+    texlab = {
+      build = {
+        executable = "latexmk",
+        args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "%f" },
+        onSave = true,
+      },
+      chktex = {
+        onOpenAndSave = true,
+        onEdit = true,
+      },
+      forwardSearch = {
+        executable = "sioyek",
+        args = {
+          "--reuse-window",
+          "--forward-search-file", "%f",
+          "--forward-search-line", "%l",
+          "%p",
         },
-      })
-    end,
-
-    pyright = function()
-      require('lspconfig').pyright.setup({
-        settings = {
-          python = {
-            analysis = {
-              typeCheckingMode = "standard",
-              autoSearchPaths = true,
-              diagnosticMode = "workspace",
-              useLibraryCodeForTypes = true,
-            },
-          },
-        },
-        on_attach = lsp_attach, -- Attach custom keymaps
-      })
-    end,
-    texlab = function()
-      local capabilities = require("cmp_nvim_lsp").default_capabilities()
-      capabilities.textDocument.completion.completionItem.snippetSupport = true
-
-      require('lspconfig').texlab.setup({
-        capabilities = capabilities,
-        settings = {
-          texlab = {
-            build = {
-              executable = "latexmk",
-              args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "%f" },
-              onSave = true,
-            },
-            chktex = {
-              onOpenAndSave = true,
-              onEdit = true,
-            },
-            forwardSearch = {
-              executable = "/Applications/Skim.app/Contents/SharedSupport/displayline",
-              args = { "%l", "%f", "%p" }, -- Line, file, and PDF file
-            },
-            experimental = {
-              snippetSupport = true, -- Ensure snippets are supported
-            },
-          },
-        },
-      })
-    end,
-  }
+      },
+      experimental = {
+        snippetSupport = true, -- Ensure snippets are supported
+      },
+    },
+  },
 })
